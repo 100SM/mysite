@@ -19,5 +19,8 @@
 		|--- JoinFormAction
 		|--- JoinAction
 	
+	com.poscoict.mysite.mvc.guestbook
+	
+	
 	com.poscoict.mysite.dao
 	com.poscoict.mysite.vo
