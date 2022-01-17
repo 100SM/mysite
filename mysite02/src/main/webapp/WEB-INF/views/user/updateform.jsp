@@ -17,19 +17,19 @@
 			<div id="user">
 				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath}/user">
 					<input type="hidden" name="a" value="update" />
+					<input type="hidden" name="no" value="${authUser.no}" />
 					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="${vo.name}">
+					<input id="name" name="name" type="text" value="${authUser.name}">
 					<label class="block-label" for="email">이메일</label>
-					<input id="email" name="email" type="text" value="${vo.email}">
+					<input id="email" name="email" type="text" value="${authUser.email}">
 					<input type="button" value="id 중복체크">
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
 
 					<fieldset>
 						<legend>성별</legend>
-						<label>여</label> <input type="radio" name="gender" value="female"
-							checked="checked"> <label>남</label> <input type="radio"
-							name="gender" value="male">
+						<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
+						<label>남</label> <input type="radio" name="gender" value="male">
 					</fieldset>
 
 					<fieldset>

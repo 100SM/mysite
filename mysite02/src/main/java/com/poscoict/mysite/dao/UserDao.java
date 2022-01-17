@@ -150,4 +150,40 @@ public class UserDao {
 		}
 		return result;
 	}
+
+	public boolean update(String name, String email, String password, String gender, Long no) {
+		boolean result = false;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			String sql = "update user set name = ?, email = ?, password = ?, gender = ? where no = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			pstmt.setString(3, password);
+			pstmt.setString(4, gender);
+			pstmt.setLong(5, no);
+
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 }
