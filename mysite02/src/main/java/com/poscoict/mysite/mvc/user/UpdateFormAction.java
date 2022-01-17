@@ -23,8 +23,8 @@ public class UpdateFormAction implements Action {
 			return;
 		}
 
-		UserVo vo = new UserDao().findByNo(authUser.getNo());
-		request.setAttribute("userVo", vo);
+		//UserVo vo = new UserDao().findByNo(authUser.getNo());
+		//request.setAttribute("userVo", vo);
 		MvcUtil.forward("user/updateform", request, response);
 	}
 }

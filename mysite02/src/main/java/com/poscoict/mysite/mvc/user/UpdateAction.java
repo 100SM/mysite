@@ -31,6 +31,6 @@ public class UpdateAction implements Action {
 		new UserDao().update(name, email, password, gender, no);
 		authUser = new UserDao().findByNo(authUser.getNo());
 		session.setAttribute("authUser", authUser);
-		MvcUtil.forward("/main/index", request, response);
+		MvcUtil.redirect(request.getContextPath(), request, response);
 	}
 }
