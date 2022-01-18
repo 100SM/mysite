@@ -160,15 +160,24 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
-			String sql = "update user set name = ?, email = ?, password = ?, gender = ? where no = ?";
-			pstmt = conn.prepareStatement(sql);
+			if ("".equals(password) || password == null) {
+				String sql = "update user set name = ?, email = ?, gender = ? where no = ?";
+				pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, name);
-			pstmt.setString(2, email);
-			pstmt.setString(3, password);
-			pstmt.setString(4, gender);
-			pstmt.setLong(5, no);
+				pstmt.setString(1, name);
+				pstmt.setString(2, email);
+				pstmt.setString(3, gender);
+				pstmt.setLong(4, no);
+			} else {
+				String sql = "update user set name = ?, email = ?, password = ?, gender = ? where no = ?";
+				pstmt = conn.prepareStatement(sql);
 
+				pstmt.setString(1, name);
+				pstmt.setString(2, email);
+				pstmt.setString(3, password);
+				pstmt.setString(4, gender);
+				pstmt.setLong(5, no);
+			}
 			int count = pstmt.executeUpdate();
 			result = count == 1;
 
