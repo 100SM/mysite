@@ -19,8 +19,7 @@ pageContext.setAttribute("newline", "\n");
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<form action="${pageContext.request.contextPath}/guestbook"
-						method="post">
+					<form action="${pageContext.request.contextPath}/guestbook" method="post">
 						<input type='hidden' name='a' value='add'>
 						<table border=1 width=500>
 							<tr>
