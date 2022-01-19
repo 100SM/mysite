@@ -1,6 +1,8 @@
 package com.poscoict.mysite.mvc.guestbook;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,10 @@ public class DeleteAction implements Action {
 		vo.setPassword(password);
 
 		new GuestbookDao().delete(vo);
+		
+		List<GuestbookVo> list = new ArrayList<>();
+		list = new GuestbookDao().findAll();
+		request.setAttribute("list", list);
 		MvcUtil.forward("guestbook/index", request, response);
 	}
 }

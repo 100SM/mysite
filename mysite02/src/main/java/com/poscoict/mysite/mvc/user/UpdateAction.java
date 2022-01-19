@@ -29,7 +29,8 @@ public class UpdateAction implements Action {
 		String gender = request.getParameter("gender");
 
 		new UserDao().update(name, email, password, gender, no);
-		authUser = new UserDao().findByNo(authUser.getNo());
+
+		authUser = new UserDao().findByNo(no);
 		session.setAttribute("authUser", authUser);
 		MvcUtil.redirect(request.getContextPath(), request, response);
 	}

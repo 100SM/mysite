@@ -127,6 +127,7 @@ public class UserDao {
 				String gender = rs.getString(4);
 
 				result = new UserVo();
+				result.setNo(no);
 				result.setName(name);
 				result.setEmail(email);
 				result.setPassword(password);
