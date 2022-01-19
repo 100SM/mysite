@@ -12,11 +12,15 @@ import com.poscoict.web.mvc.Action;
 import com.poscoict.web.util.MvcUtil;
 
 public class ViewAction implements Action {
+
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long no = Long.parseLong(request.getParameter("no"));
 
 		BoardVo vo = new BoardVo();
-		vo = new BoardDao().findByNo(no);
+		BoardDao dao = new BoardDao();
+		vo = dao.findByNo(no);
+		dao.hitCountUp(vo);
+
 		request.setAttribute("vo", vo);
 		MvcUtil.forward("board/view", request, response);
 	}
