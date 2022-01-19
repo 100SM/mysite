@@ -25,11 +25,11 @@
 						</tr>
 						<tr>
 							<td class="label">제목</td>
-							<td><input type="text" name="title" value="${vo.title }">${vo.title }</td>
+							<td><input type="text" name="title" value="${vo.title }"></td>
 						</tr>
 						<tr>
 							<td class="label">내용</td>
-							<td><textarea id="content" name="content">${vo.content }</textarea>${vo.content }</td>
+							<td><textarea id="content" name="content">${vo.content }</textarea></td>
 						</tr>
 					</table>
 					<div class="bottom">
