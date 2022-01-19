@@ -47,6 +47,17 @@
 					</tr>
 					</c:forEach>
 				</table>
+				<div class="pager">
+					<ul>
+						<li><a href="">◀</a></li>
+						<li><a href="">1</a></li>
+						<li class="selected">2</li>
+						<li><a href="">3</a></li>
+						<li>4</li>
+						<li>5</li>
+						<li><a href="">▶</a></li>
+					</ul>
+				</div>					
 				<div class="bottom">
 					<c:if test='${not empty authUser }'>
 					<a href="${pageContext.request.contextPath}/board?a=writeform" id="new-book">글쓰기</a>
