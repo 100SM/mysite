@@ -81,7 +81,7 @@ public class BoardDao {
 		return list;
 	}
 
-	public boolean insert(BoardVo vo, int order_no, int group_no, int depth) {
+	public boolean insert(BoardVo vo, int group_no, int order_no, int depth) {
 		boolean result = false;
 
 		Connection conn = null;
@@ -89,16 +89,30 @@ public class BoardDao {
 
 		try {
 			conn = getConnection();
-			if (Integer.valueOf(order_no) == null && Integer.valueOf(group_no) == null
-					&& Integer.valueOf(depth) == null) {
-				String sql = "insert into board values(null, ?, ?, 0, (select g_no from (select ifnull(max(g_no)+1, 1) as g_no from board) as tmp), 1, 1, now(), ?);";
+			String sql = "";
+			if (Integer.valueOf(order_no) == 0 && Integer.valueOf(group_no) == 0 && Integer.valueOf(depth) == 0) { // 새 글
+				sql = "insert into board values(null, ?, ?, 0, (select g_no from (select ifnull(max(g_no)+1, 1) as g_no from board) as tmp), 1, 1, now(), ?)";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getTitle());
 				pstmt.setString(2, vo.getContent());
 				pstmt.setLong(3, vo.getUserNo());
-			} else {
-
+			} else { // 답글
+				sql = "update board set o_no = o_no+1 where g_no = ? and o_no > ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, group_no);
+				pstmt.setInt(2, order_no);
+				pstmt.executeUpdate();
+				
+				sql = "insert into board values(null, ?, ?, 0, ?, ?+1, ?+1, now(), ?)";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, vo.getTitle());
+				pstmt.setString(2, vo.getContent());
+				pstmt.setInt(3, group_no);
+				pstmt.setInt(4, order_no);
+				pstmt.setInt(5, depth);
+				pstmt.setLong(6, vo.getUserNo());
 			}
 
 			int count = pstmt.executeUpdate();
@@ -176,8 +190,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 
-			String sql = "delete from board where no = ?;\r\n"
-					+ "update board set o_no=o_no-1 where o_no > order_no and g_no = group_no";
+			String sql = "delete from board where no = ?";
 
 			pstmt = conn.prepareStatement(sql);
 
