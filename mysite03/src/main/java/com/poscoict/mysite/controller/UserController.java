@@ -91,7 +91,8 @@ public class UserController {
 
 		userVo.setNo(authUser.getNo());
 		userService.updateUser(userVo);
-
+		authUser = userService.getUser(userVo.getNo());
+		session.setAttribute("authUser", authUser);
 		return "redirect:/";
 	}
 
