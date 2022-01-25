@@ -1,7 +1,10 @@
 package com.poscoict.mysite.controller;
 
+import java.net.http.HttpRequest;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +93,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/view/{no}", method = RequestMethod.GET)
-	public String view(HttpSession session, @PathVariable("no") Long no, Model model) {
+	public String view(HttpServletRequest request, HttpSession session, @PathVariable("no") Long no, Model model) {
 		model.addAttribute("boardVo", boardService.getContents(no));
 		return "board/view";
 	}
