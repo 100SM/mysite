@@ -3,13 +3,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%pageContext.setAttribute("newline", "\n");%>
+<%
+pageContext.setAttribute("newline", "\n");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css"
+	rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -22,28 +25,31 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>${vo.title}</td>
+						<td>${boardVo.title}</td>
 					</tr>
 					<tr>
 						<td class="label">작성자</td>
-						<td>${vo.userName}</td>
+						<td>${boardVo.userName}</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
-							<div class="view-content">
-								${fn:replace(vo.content,newline,"<br/>") }
+							<div class="view-content">${fn:replace(boardVo.contents, newLine, "<br>") }
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath}/board">글목록</a>
+					<a
+						href="${pageContext.request.contextPath }/board?p=${param.p }&kwd=${param.kwd }">글목록</a>
 					<c:if test="${not empty authUser }">
-						<a href="${pageContext.request.contextPath}/board/reply/${vo.no}">답글쓰기</a>
-						<c:if test="${vo.userNo == authUser.no }">
-							<a href="${pageContext.request.contextPath}/board/modify/${vo.no}">글수정</a>
-							<a href="${pageContext.request.contextPath}/board/delete/${vo.no}">삭제</a>
+						<a
+							href="${pageContext.request.contextPath }/board/reply/${boardVo.no }?p=${param.p }&kwd=${param.kwd }">답글쓰기</a>
+						<c:if test="${boardVo.userNo == authUser.no }">
+							<a
+								href="${pageContext.request.contextPath }/board/update/${boardVo.no }?p=${param.p }&kwd=${param.kwd }">글수정</a>
+							<a
+								href="${pageContext.request.contextPath }/board/delete/${boardVo.no }?p=${param.p }&kwd=${param.kwd }">삭제</a>
 						</c:if>
 					</c:if>
 				</div>

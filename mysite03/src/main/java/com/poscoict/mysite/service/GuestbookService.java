@@ -17,14 +17,14 @@ public class GuestbookService {
 	public List<GuestbookVo> getMessageList() {
 		return guestbookrepository.findAll();
 	}
-	
+
 	// 글 삭제
 	public Boolean deleteMessage(Long no, String password) {
 		return guestbookrepository.delete(no, password);
 	}
-	
+
 	// 글 추가
 	public Boolean addMessage(GuestbookVo vo) {
-		return guestbookrepository.insert(vo);
+		return guestbookrepository.insert(vo) == 1;
 	}
 }

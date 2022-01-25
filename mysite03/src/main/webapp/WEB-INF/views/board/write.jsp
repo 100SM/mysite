@@ -16,7 +16,6 @@
 		<div id="content">
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board/write">
-					<input type="hidden" name="userNo" value="${authUser.no}">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -27,11 +26,12 @@
 						</tr>
 						<tr>
 							<td class="label">내용</td>
-							<td><textarea id="content" name="content"></textarea></td>
+							<td><textarea id="contents" name="contents"></textarea></td>
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="${pageContext.request.contextPath}/board">취소</a> <input type="submit" value="등록">
+						<a href="${pageContext.request.contextPath }/board?p=${param.p }&kwd=${param.kwd }">취소</a>
+						<input type="submit" value="등록">
 					</div>
 				</form>
 			</div>

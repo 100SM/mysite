@@ -3,7 +3,7 @@ package com.poscoict.mysite.vo;
 public class BoardVo {
 	private Long no;
 	private String title;
-	private String content;
+	private String contents;
 	private Integer hit;
 	private Integer groupNo;
 	private Integer orderNo;
@@ -28,12 +28,12 @@ public class BoardVo {
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
+	public String getContents() {
+		return contents;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 	public Integer getHit() {
@@ -94,7 +94,7 @@ public class BoardVo {
 
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", groupNo="
+		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", groupNo="
 				+ groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", regDate=" + regDate + ", userNo=" + userNo
 				+ ", userName=" + userName + "]";
 	}
