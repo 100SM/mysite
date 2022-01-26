@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poscoict.mysite.security.Auth;
+import com.poscoict.mysite.security.AuthUser;
 import com.poscoict.mysite.service.BoardService;
 import com.poscoict.mysite.vo.BoardVo;
 import com.poscoict.mysite.vo.UserVo;
@@ -53,13 +54,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/update/{no}", method = RequestMethod.GET)
-	public String modify(HttpSession session, @PathVariable("no") Long no, Model model) {
-
-		/* access controller */
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null) {
-			return "redirect:/";
-		}
+	public String modify(@AuthUser UserVo authUser, @PathVariable("no") Long no, Model model) {
 		BoardVo boardVo = boardService.getContents(no, authUser.getNo());
 		model.addAttribute("boardVo", boardVo);
 
@@ -67,15 +62,10 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String modify(HttpSession session, BoardVo boardVo,
+	public String modify(@AuthUser UserVo authUser, BoardVo boardVo,
 			@RequestParam(value = "p", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "kwd", required = true, defaultValue = "") String keyword) {
 
-		/* access controller */
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null) {
-			return "redirect:/";
-		}
 		boardVo.setUserNo(authUser.getNo());
 		boardService.updateContents(boardVo);
 
@@ -83,18 +73,14 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/view/{no}", method = RequestMethod.GET)
-	public String view(HttpServletRequest request, HttpSession session, @PathVariable("no") Long no, Model model) {
+	public String view(HttpServletRequest request, @AuthUser UserVo authUser, @PathVariable("no") Long no,
+			Model model) {
 		model.addAttribute("boardVo", boardService.getContents(no));
 		return "board/view";
 	}
 
 	@RequestMapping(value = "/reply/{no}")
-	public String reply(HttpSession session, @PathVariable("no") Long no, Model model) {
-		/* access controller */
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null) {
-			return "redirect:/";
-		}
+	public String reply(@AuthUser UserVo authUser, @PathVariable("no") Long no, Model model) {
 		BoardVo boardVo = boardService.getContents(no);
 		boardVo.setOrderNo(boardVo.getOrderNo() + 1);
 		boardVo.setDepth(boardVo.getDepth() + 1);
@@ -104,14 +90,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/delete/{no}", method = RequestMethod.GET)
-	public String delete(HttpSession session, @PathVariable("no") Long boardNo,
+	public String delete(@AuthUser UserVo authUser, @PathVariable("no") Long boardNo,
 			@RequestParam(value = "p", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "kwd", required = true, defaultValue = "") String keyword) {
-		/* access controller */
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null) {
-			return "redirect:/";
-		}
 		boardService.deleteContents(boardNo, authUser.getNo());
 		return "redirect:/board?p=" + page + "&kwd=" + WebUtil.encodeURL(keyword, "UTF-8");
 	}
