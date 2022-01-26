@@ -8,12 +8,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poscoict.mysite.security.Auth;
 import com.poscoict.mysite.service.BoardService;
 import com.poscoict.mysite.vo.BoardVo;
 import com.poscoict.mysite.vo.UserVo;
@@ -35,25 +35,17 @@ public class BoardController {
 		return "board/index";
 	}
 
+	@Auth
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-	public String write(HttpSession session) {
-		/* access controller */
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null) {
-			return "redirect:/";
-		}
+	public String write() {
 		return "board/write";
 	}
 
+	@Auth
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(HttpSession session, @ModelAttribute BoardVo boardVo,
+	public String write(@AuthUser UserVo authUser, BoardVo boardVo,
 			@RequestParam(value = "p", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "kwd", required = true, defaultValue = "") String keyword) {
-		/* access controller */
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null) {
-			return "redirect:/";
-		}
 		boardVo.setUserNo(authUser.getNo());
 		boardService.addContents(boardVo);
 
@@ -110,17 +102,6 @@ public class BoardController {
 		model.addAttribute("boardVo", boardVo);
 		return "board/reply";
 	}
-
-//	@RequestMapping(value = "/reply", method = RequestMethod.POST)
-//	public String reply(HttpSession session, BoardVo boardVo) {
-//		/* access controller */
-//		UserVo authUser = (UserVo) session.getAttribute("authUser");
-//		if (authUser == null) {
-//			return "redirect:/";
-//		}
-//		boardService.addContents(boardVo);
-//		return "redirect:/board";
-//	}
 
 	@RequestMapping(value = "/delete/{no}", method = RequestMethod.GET)
 	public String delete(HttpSession session, @PathVariable("no") Long boardNo,
