@@ -50,17 +50,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(HttpSession session, UserVo userVo) {
-		/* access controller */
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null) {
-			return "redirect:/";
-		}
-
+	public String update(@AuthUser UserVo authUser, UserVo userVo) {
 		userVo.setNo(authUser.getNo());
 		userService.updateUser(userVo);
-		authUser = userService.getUser(userVo.getNo());
-		session.setAttribute("authUser", authUser);
 		return "redirect:/";
 	}
 
