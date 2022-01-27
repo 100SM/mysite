@@ -33,7 +33,7 @@
 						</tr>
 						<tr>
 							<td class="label">내용</td>
-							<td><textarea id="contents" name="contents"></textarea></td>
+							<td><textarea id="contents" name="contents" style="width: 100%; height: 6.25em; resize: none;"></textarea></td>
 						</tr>
 					</table>
 					<div class="bottom">

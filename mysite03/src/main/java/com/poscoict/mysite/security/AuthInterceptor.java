@@ -27,7 +27,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
 		// 4. Handler Method @Auth가 없다면 Type에 있는지 확인(과제)
 		if (auth == null) {
-//			handlerMethod.
+//			handlerMethod.hasMethodAnnotation(Auth.class);
 		}
 
 		// 5. Type과 Method에 @Auth가 적용이 안되어 있는 경우

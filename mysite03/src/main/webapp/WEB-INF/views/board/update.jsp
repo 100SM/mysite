@@ -29,7 +29,7 @@
 						</tr>
 						<tr>
 							<td class="label">내용</td>
-							<td><textarea id="contents" name="contents">${boardVo.contents }</textarea></td>
+							<td><textarea id="contents" name="contents" style="width: 100%; height: 6.25em; resize: none;">${boardVo.contents }</textarea></td>
 						</tr>
 					</table>
 					<div class="bottom">
