@@ -11,7 +11,6 @@ import com.poscoict.mysite.service.UserService;
 import com.poscoict.mysite.vo.UserVo;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
-
 	@Autowired
 	private UserService userService;
 
@@ -28,6 +27,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
 			return false;
 		}
+
 		// session 처리
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", authUser);
