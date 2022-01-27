@@ -12,13 +12,15 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.poscoict.mysite.vo.UserVo;
 
-public class AuthUserHandlerArgumentResolver implements HandlerMethodArgumentResolver {
+public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+
 		if (!supportsParameter(parameter)) {
 			return WebArgumentResolver.UNRESOLVED;
 		}
+
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 		HttpSession session = request.getSession();
 		if (session == null) {
@@ -32,7 +34,7 @@ public class AuthUserHandlerArgumentResolver implements HandlerMethodArgumentRes
 	public boolean supportsParameter(MethodParameter parameter) {
 		AuthUser authUser = parameter.getParameterAnnotation(AuthUser.class);
 
-		// @AuthUser가 안 붙어있음
+		// @AuthUser 가 안 붙어 있음
 		if (authUser == null) {
 			return false;
 		}
@@ -41,6 +43,7 @@ public class AuthUserHandlerArgumentResolver implements HandlerMethodArgumentRes
 		if (parameter.getParameterType().equals(UserVo.class) == false) {
 			return false;
 		}
+
 		return true;
 	}
 }
