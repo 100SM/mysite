@@ -25,12 +25,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// 3. Handler Method의 @Auth 받아오기
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 
-		// 4. Handler Method @Auth가 없다면 Type에 있는지 확인(과제)
+		// 4. Handler Method @Auth 가 없다면 Type에 있는지 확인(과제)
 		if (auth == null) {
-//			handlerMethod.hasMethodAnnotation(Auth.class);
+
 		}
 
-		// 5. Type과 Method에 @Auth가 적용이 안되어 있는 경우
+		// 5. type과 method에 @Auth 가 적용이 안되어 있는 경우
 		if (auth == null) {
 			return true;
 		}
@@ -41,14 +41,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}
-
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if (authUser == null) {
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}
 
-		// 6. 인증 확인 -> controller의 handler(method) 실행
+		// 6. 인증 확인!!! -> controller의 hanlder(method) 실행
 		return true;
 	}
+
 }
