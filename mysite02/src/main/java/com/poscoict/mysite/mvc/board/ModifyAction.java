@@ -19,9 +19,9 @@ public class ModifyAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long no = Long.parseLong(request.getParameter("no"));
 		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		String contents = request.getParameter("contents");
 
-		new BoardDao().update(no, title, content);
+		new BoardDao().update(no, title, contents);
 
 		List<BoardVo> list = new ArrayList<>();
 		String kwd = request.getParameter("kwd");

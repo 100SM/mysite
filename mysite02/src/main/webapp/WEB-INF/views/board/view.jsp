@@ -31,8 +31,8 @@
 					<tr>
 						<td class="label">내용</td>
 						<td>
-							<div class="view-content">
-								${fn:replace(vo.content,newline,"<br/>") }
+							<div class="view-contents">
+								${fn:replace(vo.contents,newline,"<br/>") }
 							</div>
 						</td>
 					</tr>

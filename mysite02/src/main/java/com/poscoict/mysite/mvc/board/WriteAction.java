@@ -16,13 +16,13 @@ import com.poscoict.web.util.MvcUtil;
 public class WriteAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		String contents = request.getParameter("contents");
 		Long userNo = Long.parseLong(request.getParameter("userNo"));
 
 		BoardVo vo = new BoardVo();
 
 		vo.setTitle(title);
-		vo.setContents(content);
+		vo.setContents(contents);
 		vo.setUserNo(userNo);
 
 		new BoardDao().insert(vo, 0, 0, 0);
