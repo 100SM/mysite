@@ -25,7 +25,7 @@ public class ReplyAction implements Action {
 		BoardVo vo = new BoardVo();
 		BoardVo evo = new BoardDao().findByNo(no);
 		vo.setTitle(title);
-		vo.setContent(content);
+		vo.setContents(content);
 		vo.setUserNo(userNo);
 
 		new BoardDao().insert(vo, evo.getGroupNo(), evo.getOrderNo(), evo.getDepth());

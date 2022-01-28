@@ -22,7 +22,7 @@ public class WriteAction implements Action {
 		BoardVo vo = new BoardVo();
 
 		vo.setTitle(title);
-		vo.setContent(content);
+		vo.setContents(content);
 		vo.setUserNo(userNo);
 
 		new BoardDao().insert(vo, 0, 0, 0);

@@ -23,12 +23,12 @@ public class BoardDao {
 			conn = getConnection();
 
 			if (kwd == null) {
-				String sql = "select board.no, title, content, hit, g_no, o_no, depth, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, user_id, user.name FROM board JOIN user ON board.user_id = user.no order by g_no desc, o_no asc";
+				String sql = "select board.no, title, contents, hit, g_no, o_no, depth, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, user_id, user.name FROM board JOIN user ON board.user_id = user.no order by g_no desc, o_no asc";
 				pstmt = conn.prepareStatement(sql);
 
 				rs = pstmt.executeQuery();
 			} else {
-				String sql = "select board.no, title, content, hit, g_no, o_no, depth, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, user_id, user.name as user_name FROM board JOIN user ON board.user_id = user.no where title like ? order by g_no desc, o_no asc";
+				String sql = "select board.no, title, contents, hit, g_no, o_no, depth, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, user_id, user.name as user_name FROM board JOIN user ON board.user_id = user.no where title like ? order by g_no desc, o_no asc";
 				pstmt = conn.prepareStatement(sql);
 				kwd = '%' + kwd + '%';
 				pstmt.setString(1, kwd);
@@ -49,7 +49,7 @@ public class BoardDao {
 				BoardVo vo = new BoardVo();
 				vo.setNo(no);
 				vo.setTitle(title);
-				vo.setContent(content);
+				vo.setContents(content);
 				vo.setHit(hit);
 				vo.setGroupNo(groupNo);
 				vo.setOrderNo(orderNo);
@@ -90,12 +90,13 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			String sql = "";
-			if (Integer.valueOf(order_no) == 0 && Integer.valueOf(group_no) == 0 && Integer.valueOf(depth) == 0) { // 새 글
+			if (Integer.valueOf(order_no) == 0 && Integer.valueOf(group_no) == 0 && Integer.valueOf(depth) == 0) { // 새
+																													// 글
 				sql = "insert into board values(null, ?, ?, 0, (select g_no from (select ifnull(max(g_no)+1, 1) as g_no from board) as tmp), 1, 1, now(), ?)";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getTitle());
-				pstmt.setString(2, vo.getContent());
+				pstmt.setString(2, vo.getContents());
 				pstmt.setLong(3, vo.getUserNo());
 			} else { // 답글
 				sql = "update board set o_no = o_no+1 where g_no = ? and o_no > ?";
@@ -103,12 +104,12 @@ public class BoardDao {
 				pstmt.setInt(1, group_no);
 				pstmt.setInt(2, order_no);
 				pstmt.executeUpdate();
-				
+
 				sql = "insert into board values(null, ?, ?, 0, ?, ?+1, ?+1, now(), ?)";
 				pstmt = conn.prepareStatement(sql);
-				
+
 				pstmt.setString(1, vo.getTitle());
-				pstmt.setString(2, vo.getContent());
+				pstmt.setString(2, vo.getContents());
 				pstmt.setInt(3, group_no);
 				pstmt.setInt(4, order_no);
 				pstmt.setInt(5, depth);
@@ -137,12 +138,16 @@ public class BoardDao {
 
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
+
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
+			// 1. JDBC 드라이버 로딩
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			// 2. 연결하기
+			String url = "jdbc:mysql://192.168.0.65:3307/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
+			System.out.print("드라이버 로딩 실패 : " + e);
 		}
 		return conn;
 	}
@@ -243,7 +248,7 @@ public class BoardDao {
 
 				vo.setNo(no);
 				vo.setTitle(title);
-				vo.setContent(content);
+				vo.setContents(content);
 				vo.setHit(hit);
 				vo.setGroupNo(groupNo);
 				vo.setOrderNo(orderNo);
@@ -272,6 +277,7 @@ public class BoardDao {
 		}
 		return vo;
 	}
+
 	public boolean hitCountUp(BoardVo vo) {
 		boolean result = false;
 
@@ -284,7 +290,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setLong(1, vo.getNo());
-			
+
 			int count = pstmt.executeUpdate();
 			result = count == 1;
 
