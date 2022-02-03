@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,8 +17,9 @@
 		<div id="content">
 			<div id="user">
 				<p class="jr-success">
-					회원가입을 축하합니다. <br> <br> <a
-						href="${pageContext.request.contextPath}/user/login">로그인하기</a>
+					<spring:message code="user.joinsuccess.label.jr-success" /><br> <br> <a
+						href="${pageContext.request.contextPath}/user/login">
+						<spring:message code="user.joinsuccess.label.goToLogin" /></a>
 				</p>
 			</div>
 		</div>

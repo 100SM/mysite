@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,16 +18,16 @@
 			<div id="user">
 				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath}/user/update">
 					<input type="hidden" name="no" value="${userVo.no}" />
-					<label class="block-label" for="name">이름</label>
+					<label class="block-label" for="name"><spring:message code="user.update.label.name" /></label>
 					<input id="name" name="name" type="text" value="${userVo.name}">
-					<label class="block-label" for="email">이메일</label>
+					<label class="block-label" for="email"><spring:message code="user.update.label.email" /></label>
 					<input type="hidden" name="email" value="${userVo.email}" />${userVo.email}
 					<input type="button" value="id 중복체크">
-					<label class="block-label">패스워드</label>
+					<label class="block-label"><spring:message code="user.update.label.password" /></label>
 					<input name="password" type="password" value="">
 
 					<fieldset>
-						<legend>성별</legend>
+						<legend><spring:message code="user.update.label.gender" /></legend>
 						<c:choose>
 							<c:when test="${userVo.gender == 'female' }">
 								<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
@@ -40,9 +41,9 @@
 					</fieldset>
 
 					<fieldset>
-						<legend>약관동의</legend>
+						<legend><spring:message code="user.update.label.agreeProv" /></legend>
 						<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
-						<label>서비스 약관에 동의합니다.</label>
+						<label><spring:message code="user.update.label.agreeProvY" /></label>
 					</fieldset>
 
 					<input type="submit" value="수정하기">

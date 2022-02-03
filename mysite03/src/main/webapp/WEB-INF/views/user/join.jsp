@@ -18,7 +18,9 @@
 		<div id="content">
 			<div id="user">
 				<form:form modelAttribute="userVo" id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath}/user/join">
-					<label class="block-label" for="name">이름</label>
+					<label class="block-label" for="name">
+						<spring:message code="user.join.label.name" />
+					</label>
 					<form:input path="name"/>
 					<p style="text-align:left; padding-left:0; color:#f00">
 						<spring:hasBindErrors name="userVo">
@@ -27,27 +29,31 @@
 							</c:if>
 						</spring:hasBindErrors>
 					</p>
-					<label class="block-label" for="email"><spring:message code="user.join.label.email" /></label>
+					<label class="block-label" for="email">
+						<spring:message code="user.join.label.email" />
+					</label>
 					<form:input path="email" />
 					<input type="button" value="id 중복체크">
 					<p style="text-align: left; padding-left: 0; color: #f00">
 						<form:errors path="email" />
 					</p>
-					<label class="block-label"><spring:message code="user.join.label.password" /></label>
+					<label class="block-label">
+						<spring:message code="user.join.label.password" />
+					</label>
 					<form:password path="password" />
 					<p style="text-align: left; padding-left: 0; color: #f00">
 						<form:errors path="password" />
 					</p>
 					<fieldset>
-						<legend>성별</legend>
+						<legend><spring:message code="user.join.label.gender" /></legend>
 						<form:radiobutton path="gender" value="female" label="여" />
 						<form:radiobutton path="gender" value="male" label="남"/>
 					</fieldset>
 
 					<fieldset>
-						<legend>약관동의</legend>
+						<legend><spring:message code="user.join.label.agreeProv" /></legend>
 						<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
-						<label>서비스 약관에 동의합니다.</label>
+						<label><spring:message code="user.join.label.agreeProvY" /></label>
 					</fieldset>
 
 					<input type="submit" value="가입하기">

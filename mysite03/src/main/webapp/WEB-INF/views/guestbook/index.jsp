@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -9,7 +10,7 @@ pageContext.setAttribute("newline", "\n");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>방명록</title>
+<title><spring:message code="user.join.label.guestbook" /></title>
 <link href="${pageContext.request.contextPath}/assets/css/main.css"
 	rel="stylesheet" type="text/css">
 </head>
@@ -23,9 +24,9 @@ pageContext.setAttribute("newline", "\n");
 						<input type='hidden' name='a' value='add'>
 						<table border=1 width=500>
 							<tr>
-								<td>이름</td>
+								<td><spring:message code="user.join.label.name" /></td>
 								<td><input type="text" name="name"></td>
-								<td>비밀번호</td>
+								<td><spring:message code="user.join.label.password" /></td>
 								<td><input type="password" name="password"></td>
 							</tr>
 							<tr>
@@ -45,7 +46,7 @@ pageContext.setAttribute("newline", "\n");
 								<td>${vo.name}</td>
 								<td>${vo.regDate}</td>
 								<td><a
-									href="${pageContext.request.contextPath}/guestbook/delete/${vo.no}">삭제</a></td>
+									href="${pageContext.request.contextPath}/guestbook/delete/${vo.no}"><spring:message code="user.join.label.delete" /></a></td>
 							</tr>
 							<tr>
 								<td colspan=4>${fn:replace(vo.message,newline,"<br/>") }</td>
