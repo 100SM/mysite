@@ -8,11 +8,11 @@
 	</select>
 	
 	<select id="findByEmailAndPassword" parameterType="map" resultType="uservo">
-		select no, name, gender from user where email = #{email} and password = #{password}
+		select no, name, gender, role from user where email = #{email} and password = #{password}
 	</select>
 	
 	<insert id="insert" parameterType="uservo">
-		insert into user values(null, #{name}, #{email}, #{password}, #{gender}, now())
+		insert into user values(null, #{name}, #{email}, #{password}, #{gender}, now(), 'USER')
 	</insert>
 	
 	<update id="update" parameterType="uservo">
