@@ -18,7 +18,7 @@
 	<update id="update" parameterType="uservo">
 		<choose>
 			<when test="password == '' or password == null">
-				update user set name = #{name}, email = #{email}, gender = #{gender} where no = ${no}
+				update user set name = #{name}, email = #{email}, gender = #{gender} where no = #{no}
 			</when>
 			<otherwise>
 				update user set name = #{name}, email = #{email}, password = #{password}, gender = #{gender} where no = #{no}
@@ -31,7 +31,7 @@
 		<if test="password != null and password != ''">
 			, password = #{password}
 		</if>
-		where no = ${no}
+		where no = #{no}
 	</update>
 	
 </mapper>
