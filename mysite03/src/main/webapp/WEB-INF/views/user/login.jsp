@@ -18,13 +18,12 @@
 		<div id="content">
 			<div id="user">
 				<form id="login-form" name="loginform" method="post" action="${pageContext.request.contextPath}/user/auth">
-					<label class="block-label" for="email">
-					<spring:message code="user.join.label.email" /></label>
+					<label class="block-label" for="email">이메일</label>
 					<input id="email" name="email" type="text" value="${email }">
-					<label class="block-label"><spring:message code="user.join.label.password" /></label>
+					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
 					<c:if test='${result == "fail"}'>
-						<p><spring:message code="user.join.label.fail" /></p>
+						<p>로그인이 실패 했습니다.</p>
 					</c:if>
 					<input type="submit" value="로그인">
 				</form>

@@ -10,7 +10,7 @@ pageContext.setAttribute("newline", "\n");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><spring:message code="user.join.label.guestbook" /></title>
+<title>방명록</title>
 <link href="${pageContext.request.contextPath}/assets/css/main.css"
 	rel="stylesheet" type="text/css">
 </head>
@@ -24,9 +24,9 @@ pageContext.setAttribute("newline", "\n");
 						<input type='hidden' name='a' value='add'>
 						<table border=1 width=500>
 							<tr>
-								<td><spring:message code="user.join.label.name" /></td>
+								<td>이름</td>
 								<td><input type="text" name="name"></td>
-								<td><spring:message code="user.join.label.password" /></td>
+								<td>패스워드</td>
 								<td><input type="password" name="password"></td>
 							</tr>
 							<tr>
@@ -46,7 +46,7 @@ pageContext.setAttribute("newline", "\n");
 								<td>${vo.name}</td>
 								<td>${vo.regDate}</td>
 								<td><a
-									href="${pageContext.request.contextPath}/guestbook/delete/${vo.no}"><spring:message code="user.join.label.delete" /></a></td>
+									href="${pageContext.request.contextPath}/guestbook/delete/${vo.no}">삭제</a></td>
 							</tr>
 							<tr>
 								<td colspan=4>${fn:replace(vo.message,newline,"<br/>") }</td>
