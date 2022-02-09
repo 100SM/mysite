@@ -59,12 +59,22 @@ public class UserController {
 		return "user/update";
 	}
 
-	@RequestMapping(value = "/main/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(@AuthUser UserVo authUser, UserVo userVo) {
 		userVo.setNo(authUser.getNo());
 		userService.updateUser(userVo);
 
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	public void auth() {
+
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public void logout() {
+
 	}
 
 //	@ExceptionHandler(Exception.class)
