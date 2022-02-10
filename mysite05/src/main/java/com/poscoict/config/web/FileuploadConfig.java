@@ -31,6 +31,6 @@ public class FileuploadConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler(env.getProperty("fileupload.resoueceMapping"))
-				.addResourceLocations("file:" + env.getProperty("fileupload.uploadLocation"));
+				.addResourceLocations("classpath:" + env.getProperty("fileupload.uploadLocation"));
 	}
 }
