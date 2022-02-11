@@ -10,10 +10,6 @@
 		<project.reporting.outputEncodnig>utf-8</project.reporting.outputEncodnig>
 	</properties>
 
-	<dependencies>
-		
-	</dependencies>
-
 	<build>
 		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
 		<resources>
@@ -48,7 +44,7 @@
 				<version>3.2.1</version>
 				<configuration>
 					<warSourceDirectory>${project.basedir}/src/main/webapp</warSourceDirectory>
-					<failOnMissingWebXml>true</failOnMissingWebXml>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -61,6 +57,5 @@
 		<module>mysite05</module>
 		<module>mysite06</module>
 	</modules>
-
 
 </project>
