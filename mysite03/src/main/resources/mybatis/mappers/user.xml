@@ -3,6 +3,9 @@
 
 <mapper namespace="user">
 
+	<select id="findByEmail" parameterType="string" resultType="uservo">
+		select no from user where email = #{email}
+	</select>
 	<select id="findByNo" parameterType="long" resultType="uservo">
 		select name, email, password, gender from user where no = #{no}
 	</select>
