@@ -4,7 +4,7 @@
 <mapper namespace="user">
 
 	<select id="findByEmail" parameterType="string" resultType="uservo">
-		elect no from user where email = #{email}
+		select no from user where email = #{email}
 	</select>
 	<select id="findByNo" parameterType="long" resultType="uservo">
 		select name, email, password, gender from user where no = #{no}
