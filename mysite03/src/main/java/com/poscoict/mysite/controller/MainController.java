@@ -26,7 +26,7 @@ public class MainController {
 	@RequestMapping("/msg02")
 	public void message02(HttpServletResponse resp) throws Exception {
 		resp.setContentType("application/json; charset=UTF-8");
-		resp.getWriter().print("(\"message\": \"Hello World\")");
+		resp.getWriter().print("{\"message\": \"Hello World\"}");
 	}
 
 	@ResponseBody
