@@ -11,7 +11,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="${pageContext.request.contextPath}/assets/css/user.css"
 	rel="stylesheet" type="text/css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-1.9.0.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#btn-checkemail").click(function(){
