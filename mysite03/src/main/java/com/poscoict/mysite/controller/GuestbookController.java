@@ -19,6 +19,11 @@ public class GuestbookController {
 	@Autowired
 	private GuestbookService guestbookService;
 
+	@RequestMapping("/spa")
+	public String spa() {
+		return "guestbook/index-spa";
+	}
+
 	@RequestMapping("")
 	public String index(Model model) {
 		List<GuestbookVo> list = guestbookService.getMessageList();
@@ -41,7 +46,8 @@ public class GuestbookController {
 	}
 
 	@RequestMapping(value = "/delete/{no}", method = RequestMethod.POST)
-	public String delete(@PathVariable("no") Long no, @RequestParam(value = "password", required = true, defaultValue = "") String password) {
+	public String delete(@PathVariable("no") Long no,
+			@RequestParam(value = "password", required = true, defaultValue = "") String password) {
 		guestbookService.deleteMessage(no, password);
 		return "redirect:/guestbook";
 	}
