@@ -19,6 +19,10 @@ public class GuestbookRepository {
 		return sqlSession.selectList("guestbook.findAll");
 	}
 
+	public List<GuestbookVo> findAllByNo(Long sn) {
+		return sqlSession.selectList("guestbook.findAllByNo", sn);
+	}
+
 	public boolean delete(Long no, String password) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("no", no);

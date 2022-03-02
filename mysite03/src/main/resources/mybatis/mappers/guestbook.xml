@@ -9,6 +9,13 @@
 		</selectKey>
 	</insert>
 	
+	<select id="findAllByNo" parameterType="long" resultType="guestbookvo">
+	<![CDATA[
+	select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regDate, message from guestbook order by no desc
+	]]>
+		
+	</select>
+	
 	<select id="findAll" resultType="guestbookvo">
 		select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regDate, message from guestbook order by reg_date desc
 	</select>

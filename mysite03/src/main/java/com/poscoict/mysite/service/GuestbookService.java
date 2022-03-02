@@ -18,6 +18,11 @@ public class GuestbookService {
 		return guestbookrepository.findAll();
 	}
 
+	// 글 전체 보기(특정 갯수만 가져오기)
+	public List<GuestbookVo> getMessageList(Long sn) {
+		return guestbookrepository.findAllByNo(sn);
+	}
+
 	// 글 삭제
 	public Boolean deleteMessage(Long no, String password) {
 		return guestbookrepository.delete(no, password);
