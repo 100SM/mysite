@@ -23,14 +23,14 @@ public class GuestbookController {
 
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public JsonResult ex01(@RequestBody GuestbookVo vo) {
+	public JsonResult add(@RequestBody GuestbookVo vo) {
 		boolean result = guestbookService.addMessage(vo);
 		return result ? JsonResult.success(vo) : JsonResult.fail("fail");
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public JsonResult ex01(@RequestParam(value = "sn", required = true, defaultValue = "-1") Long sn) {
+	@RequestMapping(value = "/list/{sn}", method = RequestMethod.GET)
+	public JsonResult list(@PathVariable(value="sn", required = false) Long sn) {
 		List<GuestbookVo> list = guestbookService.getMessageList(sn);
 
 		return JsonResult.success(list);
@@ -38,7 +38,7 @@ public class GuestbookController {
 
 	@ResponseBody
 	@RequestMapping("/delete/{no}")
-	public JsonResult ex03(@PathVariable("no") Long no,
+	public JsonResult delete(@PathVariable("no") Long no,
 			@RequestParam(value = "password", required = true, defaultValue = "") String password) {
 		boolean result = guestbookService.deleteMessage(no, password);
 		Long data = result ? no : -1L;

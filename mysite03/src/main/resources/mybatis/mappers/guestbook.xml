@@ -11,9 +11,8 @@
 	
 	<select id="findAllByNo" parameterType="long" resultType="guestbookvo">
 	<![CDATA[
-	select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regDate, message from guestbook order by no desc
+	select no, name, message, date_format(reg_date, '%Y-%m-%d') as regDate from guestbook order by no desc limit #{sn}, 3;
 	]]>
-		
 	</select>
 	
 	<select id="findAll" resultType="guestbookvo">

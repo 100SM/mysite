@@ -12,6 +12,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+	var sn = 0;
+	
 	var render = function(vo) {
 		var html = "<li data-no='" + vo.no + "'>"
 		+ "<strong>" + vo.name + "</strong>"
@@ -22,9 +24,10 @@
 		return html;
 	}
 
+
 	var fetch = function() {
 		$.ajax({
-			url : '${pageContext.request.contextPath }/api/guestbook/list',
+			url : '${pageContext.request.contextPath }/api/guestbook/list/' + sn,
 			type : 'get',
 			dataType : 'json',
 			success : function(response) {
@@ -125,6 +128,20 @@
 
 		// 최초 리스트 가져오기
 		fetch();
+		
+		// 스크롤
+		$(window).scroll(function() {
+			var $window = $(this);
+			var $document = $(document);
+			var windowHeight = $window.height();
+			var documentHeight = $document.height();
+			var scrollTop = $window.scrollTop();
+
+			if (scrollTop + windowHeight == documentHeight) {
+				sn += 3;
+				fetch();
+			}
+		});
 	});
 </script>
 </head>
@@ -141,14 +158,7 @@
 					<input type="submit" value="보내기" />
 				</form>
 				<ul id="list-guestbook">
-					<c:set var="count" value="${fn:length(list) }" />
-					<c:forEach items="${list}" var="vo" varStatus="status">
-						<li data-no='${vo.no }'><strong>${vo.name }</strong>
-							<p>${vo.message }</p>
-							<strong></strong>
-							<a href='' data-no='${vo.no }'>삭제</a>
-						</li>
-					</c:forEach>
+				
 				</ul>
 			</div>
 			<div id="dialog-delete-form" title="메세지 삭제" style="display: none">
